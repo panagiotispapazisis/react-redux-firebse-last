@@ -16,6 +16,7 @@ import { isLoaded, isEmpty } from "react-redux-firebase";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { signUp } from "../redux/actions/authAction";
 import { useSelector } from "react-redux";
+import { Card, CardContent } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -140,9 +141,22 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
+      <Grid container alignItems="center" justify="center">
+        <Grid item>
+          <Box mt={15}>
+            <Copyright />
+          </Box>
+          <Box mt={10}>
+            {sub && (
+              <Card>
+                <CardContent>
+                  <LinearProgress />
+                </CardContent>
+              </Card>
+            )}
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
