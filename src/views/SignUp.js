@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../components/Copyright";
 import { useDispatch } from "react-redux";
+import { isLoaded, isEmpty } from "react-redux-firebase";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import { signUp } from "../redux/actions/authAction";
 import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
@@ -37,21 +39,27 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const isLogin = useSelector((state) => state.firebase.profile.isLoaded);
+  const auth = useSelector((state) => state.firebase.auth);
   const classes = useStyles();
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
   const password = useRef();
+  const [sub, setSub] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const creds = {
       email: email.current.value,
       password: password.current.value,
     };
+    setSub(true);
     dispatch(signUp(creds));
   };
-
+  useEffect(() => {
+    if (isLoaded(auth) && sub && !isEmpty(auth)) {
+      history.push("/");
+    }
+  }, [sub, history, isLoaded, dispatch, auth]);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

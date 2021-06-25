@@ -61,7 +61,7 @@ export default function SignIn() {
       history.push("/");
     }
   }, [sub, history, isLoaded, dispatch, auth]);
-  console.log(sub);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
