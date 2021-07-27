@@ -6,7 +6,7 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <Box marginY={-2} marginX={30}>
+      <Box marginY={-2} marginX={20} marginRight={10}>
         <Container maxWidth="lg">
           <Card>
             <CardContent>Home</CardContent>

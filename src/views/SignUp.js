@@ -60,7 +60,7 @@ export default function SignUp() {
     if (isLoaded(auth) && sub && !isEmpty(auth)) {
       history.push("/");
     }
-  }, [sub, history, isLoaded, dispatch, auth]);
+  }, [sub, history, dispatch, auth]);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

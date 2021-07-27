@@ -163,7 +163,7 @@ export default function Navbar() {
           {routes.map((item) => {
             if (item.name === "Logout") {
               return (
-                <ListItem button onClick={handleSubmit} key={item}>
+                <ListItem button onClick={handleSubmit} key={Math.random()}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText>{item.name}</ListItemText>
                 </ListItem>
@@ -173,7 +173,7 @@ export default function Navbar() {
                 <ListItem
                   button
                   onClick={() => history.push(item.route)}
-                  key={item}
+                  key={Math.random()}
                 >
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText>{item.name}</ListItemText>
