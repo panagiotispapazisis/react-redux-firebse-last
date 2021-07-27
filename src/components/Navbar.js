@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -17,6 +17,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 import InfoIcon from "@material-ui/icons/Info";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useDispatch } from "react-redux";
@@ -28,6 +29,7 @@ const routes = [
   { name: "Home", icon: <HomeIcon />, route: "/" },
   { name: "Contact Us", icon: <PermContactCalendarIcon />, route: "/contact" },
   { name: "About Us", icon: <InfoIcon />, route: "/about" },
+  { name: "Theme Color", icon: <Brightness4Icon /> },
   { name: "Logout", icon: <ExitToAppIcon /> },
 ];
 const useStyles = makeStyles((theme) => ({
@@ -95,6 +97,8 @@ export default function Navbar() {
   const history = useHistory();
   const dispatch = useDispatch();
   const path = useSelector((state) => state.path.path);
+  const themeColor = useSelector((state) => state.themeColor.themeColor);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signOut());
@@ -109,6 +113,18 @@ export default function Navbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleChangeColor = () => {
+    if (themeColor === "light") {
+      dispatch({ type: "CHANGE_COLOR", payload: "dark" });
+    } else {
+      dispatch({ type: "CHANGE_COLOR", payload: "light" });
+    }
+  };
+
+  useEffect(() => {
+    console.log("allakse");
+  }, [themeColor]);
 
   return (
     <div className={classes.root}>
@@ -165,6 +181,23 @@ export default function Navbar() {
               return (
                 <ListItem button onClick={handleSubmit} key={Math.random()}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText>{item.name}</ListItemText>
+                </ListItem>
+              );
+            } else if (item.name === "Theme Color") {
+              var color = "";
+              if (themeColor === "light") {
+                color = "black";
+              }
+              return (
+                <ListItem
+                  button
+                  onClick={handleChangeColor}
+                  key={Math.random()}
+                >
+                  <ListItemIcon style={{ color: color }}>
+                    {item.icon}
+                  </ListItemIcon>
                   <ListItemText>{item.name}</ListItemText>
                 </ListItem>
               );
