@@ -14,8 +14,13 @@ function App() {
         <Route path="/login" component={SignIn} exact />
         <Route path="/register" component={SignUp} exact />
         <Route path="/forgot" component={ForgotPass} exact />
-        <Route path="/about" component={About} exact />
-        <Route path="/contact" component={Contact} exact />
+
+        <PrivateRoute path="/about">
+          <About />
+        </PrivateRoute>
+        <PrivateRoute path="/contact">
+          <Contact />
+        </PrivateRoute>
         <PrivateRoute path="/">
           <Home />
         </PrivateRoute>
