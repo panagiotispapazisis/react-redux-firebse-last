@@ -21,6 +21,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useDispatch } from "react-redux";
 import { signOut } from "../redux/actions/authAction";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 183;
 const routes = [
@@ -82,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
@@ -94,6 +94,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const path = useSelector((state) => state.path.path);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signOut());
@@ -101,7 +102,6 @@ export default function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -132,7 +132,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Mini variant drawer
+            {path}
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Box, Card, CardContent } from "@material-ui/core";
 import { Container } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "CHANGE_PATH", payload: "Home" });
+  });
   return (
     <div>
       <Navbar />
