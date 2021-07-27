@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useDispatch } from "react-redux";
-
+import { Box, Card, CardContent } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 function AboutUs() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -10,7 +11,13 @@ function AboutUs() {
   return (
     <div>
       <Navbar />
-      <div>About us</div>
+      <Box marginY={-2} marginX={20} marginRight={10}>
+        <Container maxWidth="lg">
+          <Card>
+            <CardContent>About Us</CardContent>
+          </Card>
+        </Container>
+      </Box>
     </div>
   );
 }
